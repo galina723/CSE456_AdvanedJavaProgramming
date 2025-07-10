@@ -1,20 +1,19 @@
 package org.example.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
 @Data
 @Getter
 @Setter
-@Table(name = "Subjects")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "Subjects")
 public class Subject {
 
     @Id
-    @Column(name = "ID", columnDefinition = "CHAR(10)", nullable = false)
+    @Column(name = "ID", columnDefinition = "CHAR(10)")
     private String id;
 
     @Column(name = "Name", nullable = false, columnDefinition = "NVARCHAR(50)")
