@@ -37,11 +37,25 @@ public class Main {
         schoolService.createSchool(school2);
         schoolService.createSchool(school3);
 
+        school1.addStudent(student1);
+        school1.addStudent(student2);
+        school2.addStudent(student3);
+        school3.addStudent(student4);
+
+        school1.addMajor(major1);
+        school2.addMajor(major2);
+        school3.addMajor(major3);
+
         MajorRepo majorRepo = new MajorRepo();
         MajorService majorService = new MajorService();
         majorService.createMajor(major1);
         majorService.createMajor(major2);
         majorService.createMajor(major3);
+
+        major1.addStudent(student1);
+        major2.addStudent(student2);
+        major3.addStudent(student3);
+        major1.addStudent(student4);
 
         StudentRepo studentRepo = new StudentRepo();
         StudentService studentService = new StudentService();
