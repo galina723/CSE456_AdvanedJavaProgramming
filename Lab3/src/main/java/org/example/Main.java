@@ -31,17 +31,6 @@ public class Main {
         Student student3 = new Student("David", Gender.MALE, LocalDate.parse("2003-05-30"), 2.93, 2021);
         Student student4 = new Student("Adam",  Gender.MALE, LocalDate.parse("2002-08-02"), 3.7, 2020);
 
-        major1.addStudent(student1);
-        major1.addStudent(student2);
-
-        school1.addStudent(student1);
-        school2.addStudent(student3);
-        school3.addStudent(student4);
-        school3.addStudent(student2);
-
-        school3.addMajor(major3);
-        school1.addMajor(major2);
-
         SchoolRepo schoolRepo = new SchoolRepo();
         SChoolService schoolService = new SChoolService();
         schoolService.createSchool(school1);
