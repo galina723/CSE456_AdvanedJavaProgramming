@@ -1,18 +1,17 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
-@Getter
-@Setter
+//@Getter
+//@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "School")
 public class School {
     @Id
@@ -24,15 +23,17 @@ public class School {
     private String location;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "school")
-    List<Student> students =  new ArrayList<>();
+    @ToString.Exclude
+    private List<Major> majors =  new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "school")
+    @ToString.Exclude
+    private List<Student> students =  new ArrayList<>();
 
     public void addStudent(Student student) {
         students.add(student);
         student.setSchool(this);
     }
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "school")
-    List<Major> majors =  new ArrayList<>();
 
     public void addMajor(Major major) {
         majors.add(major);

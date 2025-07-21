@@ -1,15 +1,15 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+//@Getter
+//@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "Major")
@@ -22,10 +22,12 @@ public class Major {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "schoolId")
+    @ToString.Exclude
     private School school;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "major")
-    List<Student> students =  new ArrayList<>();
+    @ToString.Exclude
+    private List<Student> students =  new ArrayList<>();
 
     public void addStudent(Student student) {
         students.add(student);

@@ -8,21 +8,21 @@ import java.util.List;
 
 public class SchoolRepo {
     public static void saveSchool(School school){
-        EntityManager em = javaUtil.getEntityManager();
+        EntityManager em = javaUtil.getEntity();
         em.getTransaction().begin();
         em.persist(school);
         em.getTransaction().commit();
         em.close();
     }
     public static void updateSchool(School school) {
-        EntityManager em = javaUtil.getEntityManager();
+        EntityManager em = javaUtil.getEntity();
         em.getTransaction().begin();
         em.merge(school);
         em.getTransaction().commit();
         em.close();
     }
     public static void deleteSchool(School school) {
-        EntityManager em = javaUtil.getEntityManager();
+        EntityManager em = javaUtil.getEntity();
         em.getTransaction().begin();
         School managedSchool = em.find(School.class, school.getSchoolId());
         if (managedSchool != null) {
@@ -32,11 +32,11 @@ public class SchoolRepo {
         em.close();
     }
     public static School findSchoolById(String id) {
-        EntityManager em = javaUtil.getEntityManager();
+        EntityManager em = javaUtil.getEntity();
         return em.find(School.class, id);
     }
     public static List<School> findAll(){
-        EntityManager em = javaUtil.getEntityManager();
+        EntityManager em = javaUtil.getEntity();
         return em.createQuery("SELECT s FROM School s", School.class).getResultList();
     }
 }

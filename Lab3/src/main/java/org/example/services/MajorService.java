@@ -14,16 +14,7 @@ public class MajorService {
     public void updateMajor(Major major){
         MajorRepo.updateMajor(major);
     }
-    public void deleteMajor(Major major){
-        EntityManager em = javaUtil.getEntityManager();
-        em.getTransaction().begin();
-        Major managedMajor = em.find(Major.class, major.getMajorId());
-        if (managedMajor != null) {
-            em.remove(managedMajor);
-        }
-        em.getTransaction().commit();
-        em.close();
-    }
+    public void deleteMajor(Major major){MajorRepo.deleteMajor(major);}
     public Major getMajor(String id){
         return MajorRepo.findMajorById(id);
     }

@@ -18,6 +18,10 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
+        SChoolService schoolService = new SChoolService();
+        MajorService majorService = new MajorService();
+        StudentService studentService = new StudentService();
+
         School school1 = new School("EIU", "Eastern International University", "TpHcm");
         School school2 = new School("BDU", "Binh Duong University", "TpHcm");
         School school3 = new School("VLU", "Van Lang University", "TpHcm");
@@ -31,37 +35,21 @@ public class Main {
         Student student3 = new Student("David", Gender.MALE, LocalDate.parse("2003-05-30"), 2.93, 2021);
         Student student4 = new Student("Adam",  Gender.MALE, LocalDate.parse("2002-08-02"), 3.7, 2020);
 
-        SchoolRepo schoolRepo = new SchoolRepo();
-        SChoolService schoolService = new SChoolService();
-        schoolService.createSchool(school1);
-        schoolService.createSchool(school2);
-        schoolService.createSchool(school3);
+        school1.addMajor(major1);
+        school2.addMajor(major2);
+        school3.addMajor(major3);
+
+        major1.addStudent(student1);
+        major1.addStudent(student2);
+        major2.addStudent(student3);
 
         school1.addStudent(student1);
         school1.addStudent(student2);
         school2.addStudent(student3);
         school3.addStudent(student4);
 
-        school1.addMajor(major1);
-        school2.addMajor(major2);
-        school3.addMajor(major3);
-
-        MajorRepo majorRepo = new MajorRepo();
-        MajorService majorService = new MajorService();
-        majorService.createMajor(major1);
-        majorService.createMajor(major2);
-        majorService.createMajor(major3);
-
-        major1.addStudent(student1);
-        major2.addStudent(student2);
-        major3.addStudent(student3);
-        major1.addStudent(student4);
-
-        StudentRepo studentRepo = new StudentRepo();
-        StudentService studentService = new StudentService();
-        studentService.createStudent(student1);
-        studentService.createStudent(student2);
-        studentService.createStudent(student3);
-
+        schoolService.createSchool(school1);
+        schoolService.createSchool(school2);
+        schoolService.createSchool(school3);
     }
 }

@@ -15,7 +15,7 @@ public class javaUtil {
         }
     }
     private javaUtil() {}
-    public static EntityManager getEntityManager() {
+    public static EntityManager getEntity() {
         return emf.createEntityManager();
     }
 }
