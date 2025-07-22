@@ -51,5 +51,40 @@ public class Main {
         schoolService.createSchool(school1);
         schoolService.createSchool(school2);
         schoolService.createSchool(school3);
+
+        System.out.println("Schools:");
+        schoolService.getAllSchools().forEach(System.out::println);
+        System.out.println("Majors:");
+        majorService.getAllMajors().forEach(System.out::println);
+        System.out.println("Students:");
+        studentService.getAllStudents().forEach(System.out::println);
+
+        school1.setLocation("Binh Duong");
+        schoolService.updateSchool(school1);
+        System.out.println("Schools updated:");
+        schoolService.getAllSchools().forEach(System.out::println);
+
+        major1.setMajorName("Photoshop");
+        majorService.updateMajor(major1);
+        System.out.println("Majors updated:");
+        majorService.getAllMajors().forEach(System.out::println);
+
+        student1.setGpa(4.0);
+        studentService.updateStudent(student1);
+        System.out.println("Students updated:");
+        studentService.getAllStudents().forEach(System.out::println);
+
+        studentService.deleteStudent(student2);
+        System.out.println("Students deleted:");
+        studentService.getAllStudents().forEach(System.out::println);
+
+        majorService.deleteMajor(major2);
+        System.out.println("Majors deleted:");
+        majorService.getAllMajors().forEach(System.out::println);
+
+        schoolService.deleteSchool(school2);
+        System.out.println("Schools deleted:");
+        schoolService.getAllSchools().forEach(System.out::println);
+
     }
 }

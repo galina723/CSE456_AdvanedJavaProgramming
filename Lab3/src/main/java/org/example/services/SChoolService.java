@@ -10,7 +10,7 @@ public class SChoolService {
         SchoolRepo.saveSchool(school);
     }
     public void updateSchool(School school){
-        SchoolRepo.saveSchool(school);
+        SchoolRepo.updateSchool(school);
     }
     public void deleteSchool(School school){
         SchoolRepo.deleteSchool(school);
