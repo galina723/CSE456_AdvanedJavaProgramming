@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student</title>
+
+    <!-- ✅ Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 30px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="mb-4 text-center text-primary">Edit Student</h2>
+
+        <form th:action="@{/student/edit}"  th:object="${std}" method="post" >
+            <!-- Hidden field to keep student ID -->
+            <input type="hidden" name="id" th:value="${std.getId()}" />
+
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" name="name" th:value="${std.getName()}" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Year of Birth</label>
+                <input type="number" name="yob" th:value="${std.getYob()}" class="form-control" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">GPA</label>
+                <input type="number" step="0.01" name="gpa" th:value="${std.getGpa()}" class="form-control" required />
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a href="/student-list" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
