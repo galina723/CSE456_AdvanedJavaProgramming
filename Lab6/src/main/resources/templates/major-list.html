@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Danh sách sinh viên</title>
+    <title>Major List</title>
 
     <!-- ✅ Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,6 +12,7 @@
             padding: 30px;
             background-color: #f8f9fa;
         }
+
         h1 {
             margin-bottom: 20px;
         }
@@ -20,31 +21,30 @@
 <body>
 
 <div class="container">
-    <h1 class="text-primary">Student List</h1>
-    <a th:href="@{/student/create}">Create New</a>
+    <h1 class="text-primary">Major List</h1>
+    <a th:href="@{/major/create}">Create New</a>
 
     <table class="table table-bordered table-striped table-hover">
         <thead class="table-light">
         <tr>
             <th>ID</th>
+            <th>Code</th>
             <th>Name</th>
-            <th>Year of Birth</th>
-            <th>GPA</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="std : ${std}"> <!--Với mỗi std là 1 student-->
-            <td th:text="${std.getId()}"></td>
-            <td th:text="${std.getName()}"></td>
-            <td th:text="${std.getYob()}"></td>
-            <td th:text="${std.getGpa()}"></td>
+        <tr th:each="mj : ${mj}"> <!-- Each mj in the list -->
+            <td th:text="${mj.id}"></td>
+            <td th:text="${mj.code}"></td>
+            <td th:text="${mj.name}"></td>
             <td>
                 <!-- ✅ Edit Button -->
-                <a th:href="@{'/student/edit/' + ${std.getId()}}" class="btn btn-sm btn-warning me-1">Edit</a>
+                <a th:href="@{'/major/edit/' + ${mj.getId()}}" class="btn btn-sm btn-warning me-1">Edit</a>
+
                 <!-- ✅ Delete Button -->
-                <a th:href="@{'/student/delete/' + ${std.getId()}}" class="btn btn-sm btn-danger"
-                   onclick="return confirm('Are you sure you want to delete this student?');">
+                <a th:href="@{'/major/delete/' + ${mj.getId()}}" class="btn btn-sm btn-danger"
+                   onclick="return confirm('Are you sure you want to delete this mj?');">
                     Delete
                 </a>
             </td>

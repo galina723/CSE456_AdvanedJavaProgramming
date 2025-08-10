@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Page Title</title>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background-color: #f0f4f8;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Home page</h1>
+<h1>Home Page</h1>
+
+<div class="button-container">
+    <a th:href="@{/student-list}" class="btn">Student List</a>
+    <a th:href="@{/major-list}" class="btn">Major</a>
+</div>
+
 </body>
 </html>

@@ -5,12 +5,10 @@ import org.example.demo.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -27,7 +25,7 @@ public class StudentController {
     }
 
     //hiển thị trang index
-    @GetMapping("/")
+    @GetMapping("/index")
     public String index() {
         return "index"; //index.html, không cần gõ .html vì đã khai báo suffix
     }
@@ -112,26 +110,79 @@ public class StudentController {
 //        // - RedirectAttribute (redirectAt) được gửi kèm từ bên saveStudent
 //    }
 
-    //phiên bản 3
+//    @PostMapping("/student/edit")
+//    public String saveStudentt(
+//            @RequestParam("id") int id, @RequestParam("name") String name,
+//            @RequestParam("yob") int yob, @RequestParam("gpa") double gpa, Model model,
+//            RedirectAttributes redirectAttributes) {
+//        /*
+//        - Lấy thông tin từ form
+//        - Hiển thị thông tin đó lên trang result
+//         */
+//        redirectAttributes.addFlashAttribute("msg", "Student updated successfully");
+//        redirectAttributes.addFlashAttribute("pid", id);
+//        redirectAttributes.addFlashAttribute("pname", name);
+//        redirectAttributes.addFlashAttribute("pyob", yob);
+//        redirectAttributes.addFlashAttribute("pgpa", gpa);
+//
+//        return "redirect:/student-list"; //chuyển hướng url thành localhost:8080/student/edit/result.
+//        //không phải là trang result.html nên phải có hàm xử lý url này
+//
+//    }
+
+    //phien ban 3
     @PostMapping("/student/edit")
-    public String saveStudentt(
-            @RequestParam("id") int id, @RequestParam("name") String name,
-            @RequestParam("yob") int yob, @RequestParam("gpa") double gpa, Model model,
-            RedirectAttributes redirectAttributes) {
-        /*
-        - Lấy thông tin từ form
-        - Hiển thị thông tin đó lên trang result
-         */
-        redirectAttributes.addFlashAttribute("msg", "Student updated successfully");
-        redirectAttributes.addFlashAttribute("pid", id);
-        redirectAttributes.addFlashAttribute("pname", name);
-        redirectAttributes.addFlashAttribute("pyob", yob);
-        redirectAttributes.addFlashAttribute("pgpa", gpa);
-
-        return "redirect:/student-list"; //chuyển hướng url thành localhost:8080/student/edit/result.
-        //không phải là trang result.html nên phải có hàm xử lý url này
-
+    public String saveStudent(@ModelAttribute("student") Student student, RedirectAttributes redirectAttributes){
+        /*Lay thong tin tur form
+         * Hien thi thong tin do len trang result.html*/
+        for (Student s : is.getStudents()) {
+            if (s.getId() == (student.getId())) {
+                s.setName(student.getName());
+                s.setYob(student.getYob());
+                s.setGpa(student.getGpa());
+                break;
+            }
+        }
+        redirectAttributes.addFlashAttribute("pmsg", "Save student successfully");
+        redirectAttributes.addFlashAttribute("pid", student.getId());
+        redirectAttributes.addFlashAttribute("pname", student.getName());
+        redirectAttributes.addFlashAttribute("pyob", student.getYob());
+        redirectAttributes.addFlashAttribute("pgpa", student.getGpa());
+        return "redirect:/student-list"; //tra ve trang result.html dong thoi doi url thanh /result, chuyen huong url sang /student/edit/result
+        //Nen phai co ham xu ly cho url nay
+        //Tai sao cho nay khong can Model? Model se duoc gui kem theo trang html cho thymeleaf
     }
 
+    @GetMapping("/student/delete/{id}")
+    public String deleteStudent(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
+        Iterator<Student> iterator = is.getStudents().iterator();
+        while (iterator.hasNext()) {
+            Student student = iterator.next();
+            if (student.getId() == id) {
+                iterator.remove();
+                redirectAttributes.addFlashAttribute("pmsg", "Delete student successfully");
+                break;
+            }
+        }
+        redirectAttributes.addFlashAttribute("pid", id);
+        return "redirect:/student-list";
+    }
 
+    @GetMapping("/student/create")
+    public String showCreateStudentForm(Model model) {
+        model.addAttribute("std", new Student());
+        return "student-form-create";
+    }
+
+    @PostMapping("/student/create")
+    public String createStudent(@ModelAttribute("student") Student student, RedirectAttributes redirectAttributes) {
+        is.getStudents().add(student);
+        redirectAttributes.addFlashAttribute("pmsg", "Create student successfully");
+        redirectAttributes.addFlashAttribute("pid", student.getId());
+        redirectAttributes.addFlashAttribute("pname", student.getName());
+        redirectAttributes.addFlashAttribute("pyob", student.getYob());
+        redirectAttributes.addFlashAttribute("pgpa", student.getGpa());
+
+        return "redirect:/student-list";
+    }
 }

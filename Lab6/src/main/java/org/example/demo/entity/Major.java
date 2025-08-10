@@ -9,18 +9,15 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "student")
+@Table(name = "major")
 /*
 Nếu table có key tự động tăng thì phải thêm 1 constructor đầy đủ
 tham số, nhưng bỏ tham số key đi
  */
-public class Student {
-    //Nếu id là key tự tăng thì không có trong constructor full tham số.
-    //và nên dùng kiểu wrapper class Long
+public class Major {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String code;
     private String name;
-    private int yob;
-    private double gpa;
 }
